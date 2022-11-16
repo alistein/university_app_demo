@@ -1,4 +1,5 @@
 import React, {
+  CSSProperties,
   ReactNode,
 } from "react";
 
@@ -7,9 +8,11 @@ interface ICard {
   children: any;
   maxWidth?: ReactNode;
   bgColor?: ReactNode;
+  padding?: ReactNode;
+
 }
 
-const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth }) => {
+const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth, padding }) => {
 
   return (
     <div
@@ -21,10 +24,10 @@ const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth }) => {
         flexDirection: "column",
         justifyContent: "center",
         margin: "0 auto",
-        padding: "20px",
-        boxSizing:"border-box",
-        marginTop:"10px",
-      
+        boxSizing: "border-box",
+        padding: `${padding}`,
+        borderRadius: "3px"
+
       }}
     >
       {children}

@@ -1,37 +1,41 @@
-import React, { useReducer, useState } from 'react';
-import { IUser } from '../../models/user';
-import styles from './User.module.css';
-import Button from '../UI/Button';
-import Card from '../UI/Card';
-import {AiFillDelete} from  'react-icons/ai'
-import {FiEdit} from  'react-icons/fi'
+import React, { useReducer, useState } from "react";
+import { IUser } from "../../models/user";
+import styles from "./User.module.css";
+import Button from "../UI/Button";
+import Card from "../UI/Card";
+import { AiFillDelete } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
 
 const User: React.FC<IUser> = ({ fullName, userID, Points, deleteUser }) => {
-
   const deleteItemHandler = () => {
     deleteUser?.(userID as number);
-  }
+  };
 
   return (
     <>
-            <div className={styles.card}>
-      <div>
-           <p>{userID}</p>
-        </div>
-        <div>
-          <p>{fullName}</p>
-        </div>
-        <div>
-           <p >{Points}/700</p>
-        </div>
-        <div className={styles.action}>
-          <Button onClick={deleteItemHandler} bgcolor='red' color='white'>Delete <AiFillDelete/></Button>
-          <Button bgcolor='#0554e6' color='white'>Edit <FiEdit/></Button>
-          
-        </div>
-      </div>
+        <li tabIndex={1} style={{ listStyle: "none" }} className={styles.card}>
+        
+            <div>
+              <p>{userID}</p>
+            </div>
+            <div>
+              <p>{fullName}</p>
+            </div>
+            <div>
+              <p>{Points}/700</p>
+            </div>
+            <div className={styles.action}>
+              <Button onClick={deleteItemHandler} bgcolor="red" color="white">
+                Delete <AiFillDelete />
+              </Button>
+              <Button bgcolor="#0554e6" color="white">
+                Edit <FiEdit />
+              </Button>
+            </div>
+         
+        </li>
+    
     </>
-
   );
 };
 

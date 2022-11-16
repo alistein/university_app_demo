@@ -36,7 +36,7 @@ const UserList: React.FC = () => {
 
   return (
     <>
-      <Card bgColor="#f4f4e9">
+      <Card padding={"20px"} bgColor="#f4f4e9">
         <AddUser addUser={addUser} />
 
         <>
@@ -49,6 +49,7 @@ const UserList: React.FC = () => {
               flexDirection: "row",
               justifyContent: "space-around",
               marginRight: "20px",
+              opacity: .6,
             }}
           >
             <h2>ID:</h2>
@@ -59,11 +60,22 @@ const UserList: React.FC = () => {
         </>
       </Card>
 
-      <Card bgColor="#f4f4e9">
-        {users.length == 0 && (
-          <h2 style={{ margin: "0 auto" }}>Please Enter Examiner:</h2>
-        )}
+      {users.length == 0 && (
+        <Card padding={"10px"} bgColor="#f4f4e9">
+          <h2 style={{ margin: "0 auto", opacity: .6, color: "red" }}>Please Enter Examiner:</h2>
+        </Card>
+      )}
 
+      <ul
+        style={{
+          overflowY: "scroll",
+          height: "300px",
+          padding: "0",
+          maxWidth: "700px",
+          margin: "10px auto",
+          borderRadius: "3px",
+        }}
+      >
         {users.map((user: IUser) => (
           <User
             key={user.userID}
@@ -73,7 +85,7 @@ const UserList: React.FC = () => {
             deleteUser={deleteUserHandler}
           />
         ))}
-      </Card>
+      </ul>
     </>
   );
 };
