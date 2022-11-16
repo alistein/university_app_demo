@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
-import { User } from '../../models/user';
+import { IUser } from '../../models/user';
+import styles from './AddUser.module.css';
+import Card from '../UI/Card';
 
 interface IProps {
-  addUser: (userObject: User) => void;
+  addUser: (userObject: IUser) => void;
 }
 
 const AddUser: React.FC<IProps> = ({ addUser }) => {
@@ -11,24 +13,27 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
 
   const addUserHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newUserObject: User = {
+    const newUserObject: IUser = {
       fullName: fullnameRef.current!.value,
       Points: Number(pointRef.current!.value),
       userID: Math.floor(Math.random() * 1000),
     };
+    if(newUserObject.fullName === "" || newUserObject.Points === null)  return alert("Please Enter values!");
     addUser(newUserObject);
   };
 
   return (
     <>
+    <img src="../../public/logo.png" width="200px" style={{margin: "0 auto"}} height="100px" alt="" />
       <form action="" onSubmit={addUserHandler}>
+        <Card className={styles.form}>
         <div>
           <label htmlFor="">Full Name</label>
           <input
             ref={fullnameRef}
             type="text"
             name="full_name"
-            placeholder="John Smith..."
+            placeholder="Nito Ibraqim..."
           />
         </div>
         <div>
@@ -43,6 +48,7 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
           />
         </div>
         <button>Submit</button>
+        </Card>
       </form>
     </>
   );

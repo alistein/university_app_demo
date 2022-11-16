@@ -1,21 +1,27 @@
 import React, { useReducer, useState } from 'react';
 import { IUser } from '../../models/user';
 import styles from './User.module.css';
-
+import Button from '../UI/Button';
+import {AiFillDelete} from  'react-icons/ai'
+import {FiEdit} from  'react-icons/fi'
 const User: React.FC<IUser> = ({ fullName, userID, Points }) => {
-  const [user, setUser] = useState<IUser>();
 
   return (
     <>
       <div className={styles.card}>
-        <div>
-          Full Name: <h1>{fullName}</h1>
+      <div>
+           <p>{userID}</p>
         </div>
         <div>
-          User ID: <h1>{userID}</h1>
+          <p>{fullName}</p>
         </div>
         <div>
-          Collected Points: <h1>{Points}</h1>
+           <p >{Points}/700</p>
+        </div>
+        <div className={styles.action}>
+          <Button bgcolor='red' color='white'>Delete <AiFillDelete/></Button>
+          <Button bgcolor='#0554e6' color='white'>Edit <FiEdit/></Button>
+          
         </div>
       </div>
     </>
