@@ -2,13 +2,19 @@ import React, { useReducer, useState } from 'react';
 import { IUser } from '../../models/user';
 import styles from './User.module.css';
 import Button from '../UI/Button';
+import Card from '../UI/Card';
 import {AiFillDelete} from  'react-icons/ai'
 import {FiEdit} from  'react-icons/fi'
-const User: React.FC<IUser> = ({ fullName, userID, Points }) => {
+
+const User: React.FC<IUser> = ({ fullName, userID, Points, deleteUser }) => {
+
+  const deleteItemHandler = () => {
+    deleteUser?.(userID as number);
+  }
 
   return (
     <>
-      <div className={styles.card}>
+            <div className={styles.card}>
       <div>
            <p>{userID}</p>
         </div>
@@ -19,12 +25,13 @@ const User: React.FC<IUser> = ({ fullName, userID, Points }) => {
            <p >{Points}/700</p>
         </div>
         <div className={styles.action}>
-          <Button bgcolor='red' color='white'>Delete <AiFillDelete/></Button>
+          <Button onClick={deleteItemHandler} bgcolor='red' color='white'>Delete <AiFillDelete/></Button>
           <Button bgcolor='#0554e6' color='white'>Edit <FiEdit/></Button>
           
         </div>
       </div>
     </>
+
   );
 };
 

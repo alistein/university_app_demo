@@ -1,5 +1,6 @@
 export interface IUser {
   fullName: string;
-  userID: number;
+  userID?: number;
   Points: number;
+  deleteUser?: (userID: number) => void;
 }

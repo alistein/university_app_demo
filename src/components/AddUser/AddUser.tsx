@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { IUser } from '../../models/user';
 import styles from './AddUser.module.css';
 import Card from '../UI/Card';
@@ -11,17 +11,23 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
   const fullnameRef = useRef<HTMLInputElement>(null);
   const pointRef = useRef<HTMLInputElement>(null);
 
-  const addUserHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  let newUserObject:IUser;
+
+  // Send user details to List in UserList.tsx 
+  const addUserHandler = useCallback((event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newUserObject: IUser = {
+        newUserObject = {
       fullName: fullnameRef.current!.value,
       Points: Number(pointRef.current!.value),
       userID: Math.floor(Math.random() * 1000),
     };
-    if(newUserObject.fullName === "" || newUserObject.Points === null)  return alert("Please Enter values!");
+    if(!newUserObject.fullName || !newUserObject.Points)  return alert("Please Enter values!");
     addUser(newUserObject);
-  };
+    fullnameRef.current!.value = "";
+    pointRef.current!.value = "";
 
+  },[])
+   
   return (
     <>
     <img src="../../public/logo.png" width="200px" style={{margin: "0 auto"}} height="100px" alt="" />

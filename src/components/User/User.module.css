@@ -1,12 +1,18 @@
 .card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 100px;
+  display: grid;
   font-size: 20px;
-  border-top: 1px gray solid;
+  border-bottom: 1px gray solid;
   animation: anim .5s 1;
+  background-color: rgb(237, 237, 194);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items:  center;
+  gap: 10px;
+  padding: 0 10px;
+  
+}
+
+.card:first-child{
+  border-top: 1px gray solid;
 }
 
 @keyframes anim {
