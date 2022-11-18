@@ -4,3 +4,8 @@ export interface IUser {
   Points: number;
   deleteUser?: (userID: number) => void;
 }
+
+export interface IUserList {
+  users: IUser[],
+  deleteUserHandler: (userID: number) => void;
+}

@@ -2,6 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { IUser } from '../../models/user';
 import styles from './AddUser.module.css';
 import Card from '../UI/Card';
+import Input from '../UI/Input';
+
 
 interface IProps {
   addUser: (userObject: IUser) => void;
@@ -21,6 +23,7 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
       Points: Number(pointRef.current!.value),
       userID: Math.floor(Math.random() * 1000),
     };
+    console.log(`${fullnameRef} ${pointRef}`)
     if(!newUserObject.fullName || !newUserObject.Points)  return alert("Please Enter values!");
     addUser(newUserObject);
     fullnameRef.current!.value = "";
@@ -35,8 +38,8 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
         <Card className={styles.form}>
         <div>
           <label htmlFor="">Full Name</label>
-          <input
-            ref={fullnameRef}
+          <Input
+            Iref={fullnameRef}
             type="text"
             name="full_name"
             placeholder="Nito Ibraqim..."
@@ -44,13 +47,13 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
         </div>
         <div>
           <label htmlFor="">Points</label>
-          <input
-            ref={pointRef}
+          <Input
+            Iref={pointRef}
             type="number"
             name="points"
             placeholder="0-700"
-            min="0"
-            max="700"
+            min='0'
+            max='700'
           />
         </div>
         <button>Submit</button>

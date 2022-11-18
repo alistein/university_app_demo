@@ -1,44 +1,15 @@
 import React, { useReducer, useState, useEffect } from "react";
 import AddUser from "../AddUser/AddUser";
 import User from "../User/User";
-import { IUser } from "../../models/user";
-import { actionHandler, ActionKind } from "../../store/store";
-
+import { IUser,IUserList } from "../../models/user";
 import Card from "../UI/Card";
 
-const key = "KEY_USERS";
 
-const UserList: React.FC = () => {
-  const [users, dispatch] = useReducer(actionHandler, []);
-
-  useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem(key) as string);
-    if (!savedUser) return;
-    dispatch({ type: ActionKind.ADD_LOC, payload: savedUser });
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(users));
-  }, [users]);
-
-  const addUser = (userObject: IUser) => {
-    console.log(users);
-    if (!userObject) return;
-    dispatch({ type: ActionKind.ADD, payload: userObject });
-  };
-
-  const deleteUserHandler = (userID: number): void => {
-    const updatedUser = users.filter(
-      (user: { userID: number }) => user.userID !== userID
-    );
-    dispatch({ type: ActionKind.DELETE, payload: updatedUser });
-  };
+const UserList: React.FC<IUserList> = ({users, deleteUserHandler}) => {
 
   return (
     <>
       <Card padding={"20px"} bgColor="#f4f4e9">
-        <AddUser addUser={addUser} />
-
         <>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <h1>{users.length} Examiner</h1>
@@ -61,7 +32,7 @@ const UserList: React.FC = () => {
       </Card>
 
       {users.length == 0 && (
-        <Card padding={"10px"} bgColor="#f4f4e9">
+        <Card  margin={"20px auto"} padding={"10px"} bgColor="#f4f4e9">
           <h2 style={{ margin: "0 auto", opacity: .6, color: "red" }}>Please Enter Examiner:</h2>
         </Card>
       )}

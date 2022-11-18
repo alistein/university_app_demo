@@ -2,17 +2,20 @@ import React, { useReducer, useState } from "react";
 import { IUser } from "../../models/user";
 import styles from "./User.module.css";
 import Button from "../UI/Button";
-import Card from "../UI/Card";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import Modal from "../UI/Modal";
 
 const User: React.FC<IUser> = ({ fullName, userID, Points, deleteUser }) => {
   const deleteItemHandler = () => {
     deleteUser?.(userID as number);
   };
 
+  const [isOpen,setIsOpen] = useState(false);
+
   return (
     <>
+   {isOpen && <Modal onClick={() => {setIsOpen(false)}}/>}
         <li tabIndex={1} style={{ listStyle: "none" }} className={styles.card}>
         
             <div>
@@ -28,7 +31,7 @@ const User: React.FC<IUser> = ({ fullName, userID, Points, deleteUser }) => {
               <Button onClick={deleteItemHandler} bgcolor="red" color="white">
                 Delete <AiFillDelete />
               </Button>
-              <Button bgcolor="#0554e6" color="white">
+              <Button onClick={() => {setIsOpen(true)}} bgcolor="#0554e6" color="white">
                 Edit <FiEdit />
               </Button>
             </div>

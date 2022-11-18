@@ -6,23 +6,23 @@ export enum ActionKind {
     DELETE = 'DELETE',
     EDIT = 'EDIT'
   }
+
   
   interface Action {
     type: ActionKind;
-    payload?: string | IUser;
+    payload?: IUser;
   }
   
   export const actionHandler = (state:IUser[], action:Action):any => {
-   const {type,payload} = action;
-   switch(type){
-    case ActionKind.ADD:
-      return [payload , ...state]; 
-    case ActionKind.ADD_LOC:
-      return payload;
-    case ActionKind.DELETE:
-      return payload;  
-     
+    const {type,payload} = action;
+    switch(type){
+     case ActionKind.ADD:
+       return [payload, ...state];
+     case ActionKind.ADD_LOC:
+       return payload;
+     case ActionKind.DELETE:
+       return payload;  
+      
+    }
    }
-  }
-
   

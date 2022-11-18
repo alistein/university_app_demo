@@ -9,10 +9,11 @@ interface ICard {
   maxWidth?: ReactNode;
   bgColor?: ReactNode;
   padding?: ReactNode;
+  margin?: ReactNode;
 
 }
 
-const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth, padding }) => {
+const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth, padding,margin }) => {
 
   return (
     <div
@@ -23,10 +24,11 @@ const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth, padding
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        margin: "0 auto",
+        margin: `${margin || "0 auto"}`,
         boxSizing: "border-box",
-        padding: `${padding}`,
-        borderRadius: "3px"
+        padding: `${padding || "20px"}`,
+        borderRadius: "3px",
+        zIndex:"-1",
 
       }}
     >
