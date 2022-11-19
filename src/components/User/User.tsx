@@ -11,33 +11,47 @@ const User: React.FC<IUser> = ({ fullName, userID, Points, deleteUser }) => {
     deleteUser?.(userID as number);
   };
 
-  const [isOpen,setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-   {isOpen && <Modal onClick={() => {setIsOpen(false)}}/>}
-        <li tabIndex={1} style={{ listStyle: "none" }} className={styles.card}>
-        
-            <div>
-              <p>{userID}</p>
-            </div>
-            <div>
-              <p>{fullName}</p>
-            </div>
-            <div>
-              <p>{Points}/700</p>
-            </div>
-            <div className={styles.action}>
-              <Button onClick={deleteItemHandler} bgcolor="red" color="white">
-                Delete <AiFillDelete />
-              </Button>
-              <Button onClick={() => {setIsOpen(true)}} bgcolor="#0554e6" color="white">
-                Edit <FiEdit />
-              </Button>
-            </div>
-         
-        </li>
-    
+      {isOpen && (
+        <Modal
+          placeHolderName={fullName}
+          placeHolderPoints={Points!.toString()}
+          userID={userID!}
+          setIsOpenProp={setIsOpen}
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        />
+      )}
+      <li tabIndex={1} style={{ listStyle: "none" }} className={styles.card}>
+        <div>
+          <p>{userID}</p>
+        </div>
+        <div>
+          <p>{fullName}</p>
+        </div>
+        <div>
+          <p>{Points}/700</p>
+        </div>
+        <div className={styles.action}>
+          <Button onClick={deleteItemHandler} bgcolor="red" color="white" width="100px">
+            Delete <AiFillDelete />
+          </Button>
+          <Button
+            onClick={() => {
+              setIsOpen(true);
+            }}
+            bgcolor="#0554e6"
+            color="white"
+            width="120px"
+          >
+            Edit Points<FiEdit />
+          </Button>
+        </div>
+      </li>
     </>
   );
 };

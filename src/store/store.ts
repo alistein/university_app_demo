@@ -1,4 +1,4 @@
-import { IUser } from "../models/user";
+import { IUser,IUserEdit } from "../models/user";
 
 export enum ActionKind {
     ADD = 'ADD',
@@ -10,7 +10,7 @@ export enum ActionKind {
   
   interface Action {
     type: ActionKind;
-    payload?: IUser;
+    payload?: IUserEdit
   }
   
   export const actionHandler = (state:IUser[], action:Action):any => {
@@ -22,7 +22,10 @@ export enum ActionKind {
        return payload;
      case ActionKind.DELETE:
        return payload;  
-      
+     case ActionKind.EDIT:
+      const index = payload?.index;
+      state[index!].Points = Number(payload?.modalPointsRef);
+      return [...state];
     }
    }
   

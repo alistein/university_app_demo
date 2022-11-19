@@ -12,7 +12,7 @@ const UserList: React.FC<IUserList> = ({users, deleteUserHandler}) => {
       <Card padding={"20px"} bgColor="#f4f4e9">
         <>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <h1>{users.length} Examiner</h1>
+            <h1>{users!.length} Examiner</h1>
           </div>
           <div
             style={{
