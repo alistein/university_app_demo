@@ -9,15 +9,13 @@ import Toast from "./components/UI/Toast";
 
 const key = "KEY_USERS";
 
-
-
 export type  GlobalContext = {
   users?: IUser[],
-  dispatch?: any;
-  setIsActive?: any ,
-  setToastContent?: any,
+  dispatch?: any,
+  setIsActive?:  (value: boolean) => void,
+  setToastContent?:  (value: ReactNode) => void,
 }
-
+ 
 export const ModalLayer = createContext<GlobalContext>({users: [{fullName: "", Points: 0}],dispatch: () => {}});
 export const ctx = () => useContext(ModalLayer);
 
@@ -41,23 +39,23 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsActive(false);
-    }, 2500);
+    }, 3000);
+ 
     return () => clearTimeout(timer);
   }, [users]);
 
+ 
+
   const addUser = useCallback(
     (userObject: IUser) => {
-      console.log(users);
       if (!userObject) return;
       dispatch({ type: ActionKind.ADD, payload: userObject });
-      setToastContent(<Toast children="Succesfully Added" status="Success"/>);
+      setToastContent(<Toast children={`Succesfully Added`} users={users} status="Success"/>);
       setIsActive(true);
-
     },
     [users]
   );
-
- 
+  
 
   const deleteUserHandler = useCallback(
     (userID: number): void => {
@@ -65,7 +63,7 @@ const App = () => {
         (user: { userID: number }) => user.userID !== userID
       );
       dispatch({ type: ActionKind.DELETE, payload: updatedUser });
-      setToastContent(<Toast children="Succesfuly Removed" status="Danger"/>)
+      setToastContent(<Toast children={`Succesfuly Removed`} users={users} status="Danger"/>)
       setIsActive(true);
     },
     [users]
@@ -75,10 +73,10 @@ const App = () => {
 
   return (
     <>
+    <ModalLayer.Provider value={{users,dispatch,setIsActive,setToastContent}}>
       <Card bgColor="#f4f4e9">
         <AddUser addUser={addUser} />
       </Card>
-      <ModalLayer.Provider value={{users,dispatch,setIsActive,setToastContent}}>
         <UserList users={users} deleteUserHandler={deleteUserHandler} />
       </ModalLayer.Provider>
       {isActive && toastContent}

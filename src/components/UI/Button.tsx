@@ -1,14 +1,9 @@
 import React, { CSSProperties, ReactNode } from "react";
 import { IconType } from "react-icons/lib/cjs/iconBase";
+import { IButton } from "../../models/user";
 import styles from "./Button.module.css";
 
-interface IButton {
-  children? : string | ReactNode;
-  bgcolor? : string;
-  color? : string;
-  width? :string;
-  onClick?: () => void;
-}
+
 
 const Button: React.FC<IButton> = ({ children, bgcolor, color, onClick, width }) => {
   return (

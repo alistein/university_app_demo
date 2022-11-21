@@ -1,16 +1,7 @@
 import React, { CSSProperties, LegacyRef, useRef } from "react";
+import { Iinput } from "../../models/user";
 
-interface Iinput {
-  type: string;
-  className?: "string";
-  name?: string;
-  placeholder?: string;
-  value?: string;
-  Iref?: LegacyRef<HTMLInputElement> | undefined;
-  min?: string;
-  max?: string;
-  defaultValue?: string,
-}
+
 
 const input: CSSProperties = {
   height: "40px",
@@ -33,6 +24,7 @@ const Input: React.FC<Iinput> = ({
   Iref,
   value,
   defaultValue,
+  disabled
 }) => {
   return (
     <>
@@ -47,6 +39,7 @@ const Input: React.FC<Iinput> = ({
       min={min}
       max={max}
       defaultValue={defaultValue}
+      disabled={disabled}
     />
     </>
 

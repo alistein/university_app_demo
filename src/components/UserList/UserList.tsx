@@ -1,8 +1,8 @@
 import React, { useReducer, useState, useEffect } from "react";
-import AddUser from "../AddUser/AddUser";
 import User from "../User/User";
 import { IUser,IUserList } from "../../models/user";
 import Card from "../UI/Card";
+import styles from "./UserList.module.css";
 
 
 const UserList: React.FC<IUserList> = ({users, deleteUserHandler}) => {
@@ -15,13 +15,7 @@ const UserList: React.FC<IUserList> = ({users, deleteUserHandler}) => {
             <h1>{users!.length} Examiner</h1>
           </div>
           <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              marginRight: "20px",
-              opacity: .6,
-            }}
+            className={styles.listHeader}
           >
             <h2>ID:</h2>
             <h2>Full Name:</h2>

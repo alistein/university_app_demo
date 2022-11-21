@@ -3,11 +3,8 @@ import { IUser } from '../../models/user';
 import styles from './AddUser.module.css';
 import Card from '../UI/Card';
 import Input from '../UI/Input';
+import {IProps} from '../../models/user'
 
-
-interface IProps {
-  addUser: (userObject: IUser) => void;
-}
 
 const AddUser: React.FC<IProps> = ({ addUser }) => {
   const fullnameRef = useRef<HTMLInputElement>(null);
@@ -18,13 +15,14 @@ const AddUser: React.FC<IProps> = ({ addUser }) => {
   // Send user details to List in UserList.tsx 
   const addUserHandler = useCallback((event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if(Number(fullnameRef.current?.value)) return alert("Please enter full name");
         newUserObject = {
       fullName: fullnameRef.current!.value,
       Points: Number(pointRef.current!.value),
       userID: Math.floor(Math.random() * 1000),
     };
-    console.log(`${fullnameRef} ${pointRef}`)
-    if(!newUserObject.fullName || !newUserObject.Points)  return alert("Please Enter values!");
+    if((!newUserObject.fullName || !newUserObject.Points))  return alert("Please Enter values!");
+   
     addUser(newUserObject);
     fullnameRef.current!.value = "";
     pointRef.current!.value = "";

@@ -7,10 +7,9 @@ export enum ActionKind {
     EDIT = 'EDIT'
   }
 
-  
-  interface Action {
+  export interface Action {
     type: ActionKind;
-    payload?: IUserEdit
+    payload?: IUserEdit & IUser
   }
   
   export const actionHandler = (state:IUser[], action:Action):any => {

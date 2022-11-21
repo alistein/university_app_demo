@@ -2,10 +2,11 @@
   position: fixed;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   width: 700px;
   gap: 10px;
   top: 20vh;
-  left: 25%;
+  left: calc(20% + 100px);
   padding: 20px;
   background-color: beige;
   border-radius: 5px;
@@ -50,4 +51,10 @@
   100% {
     opacity: 1;
   }
+}
+
+@media only screen and (max-width: 1000px) {
+ .modal{
+  width: 300px;
+ }
 }

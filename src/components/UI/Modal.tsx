@@ -1,25 +1,13 @@
-import React, { FC, LegacyRef, useRef,useContext } from "react";
+import React, { FC,useRef} from "react";
 import ReactDOM from "react-dom";
 import { ctx } from "../../App";
-import { IUserEdit } from "../../models/user";
+import { IModal, IOverlay, IUserEdit } from "../../models/user";
 import { ActionKind } from "../../store/store";
 import Button from "./Button";
 import Input from "./Input";
 import styles from "./Modal.module.css";
 import Toast from "./Toast";
 
-
-
-interface IModal {
-    onClick?: () => void;
-    readonly placeHolderName?: string;
-    placeHolderPoints?: string;
-    userID:number;
-    setIsOpenProp:(isOpen: boolean) => void;
-}
-interface IOverlay {
-    onClick: () => void;
-}
 
 const modal = document.getElementById("modal");
 
@@ -42,13 +30,13 @@ const ModalOverlay: FC<IModal> = ({ placeHolderName, placeHolderPoints,userID,se
       const index = users?.findIndex((user) => user.userID == userID);
       const editPayload:IUserEdit = {
         index:index!,
-        modalPointsRef:modalPointsRef.current!.value,
+        modalPointsRef:modalPointsRef.current?.value,
       }
       if(!editPayload.modalPointsRef) return;
       dispatch({type: ActionKind.EDIT, payload: editPayload});
       setIsOpenProp(false);
-      setIsActive(true);
-      setToastContent(<Toast children={`${placeHolderName}'s Point Edited to ${modalPointsRef.current?.value}`} status="Info" />);
+      setIsActive!(true);
+      setToastContent!(<Toast children={`${placeHolderName}'s Point Edited to ${modalPointsRef.current?.value}`} status="Info" />);
     }
 
     return (
@@ -58,7 +46,7 @@ const ModalOverlay: FC<IModal> = ({ placeHolderName, placeHolderPoints,userID,se
                 <form action="" onChange={(e) => e.preventDefault()}>
                 <div>
                     <label htmlFor="">Full Name</label>
-                    <Input type="name" name="full_name" placeholder={placeHolderName} defaultValue={placeHolderName} Iref={modalNameRef} />
+                    <Input type="name" name="full_name" placeholder={placeHolderName} defaultValue={`${placeHolderName} (change disabled)`} disabled={true} Iref={modalNameRef} />
                 </div>
                 <div>
                     <label htmlFor="">Points</label>

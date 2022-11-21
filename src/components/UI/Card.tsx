@@ -1,17 +1,5 @@
-import React, {
-  CSSProperties,
-  ReactNode,
-} from "react";
-
-interface ICard {
-  className?: string;
-  children: any;
-  maxWidth?: ReactNode;
-  bgColor?: ReactNode;
-  padding?: ReactNode;
-  margin?: ReactNode;
-
-}
+import React from "react";
+import { ICard } from "../../models/user";
 
 const Card: React.FC<ICard> = ({ className, children, bgColor, maxWidth, padding,margin }) => {
 

@@ -1,6 +1,6 @@
 .card {
   display: grid;
-  font-size: calc(0.6rem + 10px);
+  font-size: calc(10px + 6 * ((100vw - 320px) / 680));
   border-bottom: 1px #0554e6 solid;
   border-left: 1px #0554e6 solid;
   border-right: 1px #0554e6 solid;
@@ -31,3 +31,12 @@ flex-direction: row;
 gap: 10px;
 }
 
+@media only screen and (max-width: 500px) {
+  .action{
+    flex-direction: column;
+    gap: 3px;
+  }
+  .card{
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));;
+  }
+}
